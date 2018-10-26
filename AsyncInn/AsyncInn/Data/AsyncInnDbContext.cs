@@ -16,6 +16,7 @@ namespace AsyncInn.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Recognizes Composite Keys
             modelBuilder.Entity<RoomAmenities>().HasKey(
                 ce => new { ce.RoomID, ce.AmenitiesID }
                 );
