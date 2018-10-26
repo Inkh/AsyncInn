@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AsyncInn.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,23 @@ namespace AsyncInn.Data
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RoomAmenities>().HasKey(
+                ce => new { ce.RoomID, ce.AmenitiesID }
+                );
+
+            modelBuilder.Entity<HotelRoom>().HasKey(
+                ce => new { ce.RoomID, ce.HotelID }
+                );
+        }
+
+        public DbSet<Room> Room { get; set; }
+        public DbSet<Hotel> Hotel { get; set; }
+        public DbSet<HotelRoom> HotelRooms { get; set; }
+        public DbSet<Amenities> Amenities { get; set; }
+        public DbSet<RoomAmenities> RoomAmenities { get; set; }
+
     }
 }
