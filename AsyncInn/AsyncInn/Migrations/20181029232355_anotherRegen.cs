@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AsyncInn.Migrations
 {
-    public partial class addtables : Migration
+    public partial class anotherRegen : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace AsyncInn.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,9 +26,9 @@ namespace AsyncInn.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    Phone = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +41,7 @@ namespace AsyncInn.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Layout = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -55,10 +55,9 @@ namespace AsyncInn.Migrations
                 {
                     HotelID = table.Column<int>(nullable: false),
                     RoomNumber = table.Column<int>(nullable: false),
-                    RoomID = table.Column<decimal>(nullable: false),
+                    RoomID = table.Column<int>(nullable: false),
                     Rate = table.Column<decimal>(nullable: false),
-                    PetFriendly = table.Column<bool>(nullable: false),
-                    RoomID1 = table.Column<int>(nullable: true)
+                    PetFriendly = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,11 +69,11 @@ namespace AsyncInn.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HotelRooms_Room_RoomID1",
-                        column: x => x.RoomID1,
+                        name: "FK_HotelRooms_Room_RoomID",
+                        column: x => x.RoomID,
                         principalTable: "Room",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,15 +100,47 @@ namespace AsyncInn.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Amenities",
+                columns: new[] { "ID", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Air Conditioning" },
+                    { 2, "Private Parking" },
+                    { 3, "Heater" },
+                    { 4, "In-unit washer dryer" },
+                    { 5, "Jacuzzi" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Hotel",
+                columns: new[] { "ID", "Address", "Name", "Phone" },
+                values: new object[,]
+                {
+                    { 1, "1989 Waterfront Ave", "Waterfront Inn", "(888) 921-1023" },
+                    { 2, "2901 3rd Ave #300", "Code Fellows", "(206) 681 - 9318" },
+                    { 3, "2901 3rd Ave #200", "Async Inn Prima", "(317) 792 - 8429" },
+                    { 4, "1922 1st Ave", "Crib of Jim", "(999) 888-7777" },
+                    { 5, "22323 Budget Ave", "Budget Inn", "(909) 887-2348" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Room",
+                columns: new[] { "ID", "Layout", "Name" },
+                values: new object[,]
+                {
+                    { 1, 2, "Single" },
+                    { 2, 1, "Double" },
+                    { 3, 0, "Personal Resort" },
+                    { 4, 2, "Executive Suite" },
+                    { 5, 1, "Halloween Party Special" },
+                    { 6, 0, "Budget BnB" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_HotelRooms_HotelID",
                 table: "HotelRooms",
                 column: "HotelID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HotelRooms_RoomID1",
-                table: "HotelRooms",
-                column: "RoomID1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoomAmenities_AmenitiesID",

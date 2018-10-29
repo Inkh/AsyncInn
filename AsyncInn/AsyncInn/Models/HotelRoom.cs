@@ -14,7 +14,6 @@ namespace AsyncInn.Models
         [Required]
         public int RoomNumber { get; set; }
 
-        [Key]
         [Display(Name = "Room Type")]
         public int RoomID { get; set; }
 
