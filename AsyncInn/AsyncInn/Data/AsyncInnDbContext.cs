@@ -25,6 +25,7 @@ namespace AsyncInn.Data
                 ce => new { ce.RoomID, ce.HotelID }
                 );
 
+            //Seeds 5 amenities into DB
             modelBuilder.Entity<Amenities>().HasData(
                 new Amenities
                 {
@@ -50,6 +51,85 @@ namespace AsyncInn.Data
                 {
                     ID = 5,
                     Name = "Jacuzzi"
+                }
+                );
+
+            //Seeds 6 room types into DB
+            modelBuilder.Entity<Room>().HasData(
+                new Room
+                {
+                    ID = 1,
+                    Name = "Single",
+                    Layout = Layout.oneBed
+                },
+                new Room
+                {
+                    ID = 2,
+                    Name = "Double",
+                    Layout = Layout.twoBed
+                },
+                new Room
+                {
+                    ID = 3,
+                    Name = "Personal Resort",
+                    Layout = Layout.studio
+                },
+                new Room
+                {
+                    ID = 4,
+                    Name = "Executive Suite",
+                    Layout = Layout.oneBed
+                },
+                new Room
+                {
+                    ID = 5,
+                    Name = "Halloween Party Special",
+                    Layout = Layout.twoBed
+                },
+                new Room
+                {
+                    ID = 6,
+                    Name = "Budget BnB",
+                    Layout = Layout.studio
+                }
+                );
+
+            //Seeds 5 hotels into DB
+            modelBuilder.Entity<Hotel>().HasData(
+                new Hotel
+                {
+                    ID = 1,
+                    Name = "Waterfront Inn",
+                    Address = "1989 Waterfront Ave",
+                    Phone = "(888) 921-1023"
+                },
+                new Hotel
+                {
+                    ID = 2,
+                    Name = "Code Fellows",
+                    Address = "2901 3rd Ave #300",
+                    Phone = "(206) 681 - 9318"
+                },
+                new Hotel
+                {
+                    ID = 3,
+                    Name = "Async Inn Prima",
+                    Address = "2901 3rd Ave #200",
+                    Phone = "(317) 792 - 8429"
+                },
+                new Hotel
+                {
+                    ID = 4,
+                    Name = "Crib of Jim",
+                    Address = "1922 1st Ave",
+                    Phone = "(999) 888-7777"
+                },
+                new Hotel
+                {
+                    ID = 5,
+                    Name = "Budget Inn",
+                    Address = "22323 Budget Ave",
+                    Phone = "(909) 887-2348"
                 }
                 );
 
