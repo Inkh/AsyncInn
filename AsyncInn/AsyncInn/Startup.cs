@@ -14,7 +14,7 @@ namespace AsyncInn
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; set; }
+        private IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {

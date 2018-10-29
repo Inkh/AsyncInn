@@ -16,7 +16,7 @@ namespace AsyncInn.Models
 
         [Key]
         [Display(Name = "Room Type")]
-        public decimal RoomID { get; set; }
+        public int RoomID { get; set; }
 
         [Required]
         public decimal Rate { get; set; }
