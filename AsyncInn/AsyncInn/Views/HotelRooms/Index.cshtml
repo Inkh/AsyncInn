@@ -24,9 +24,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Hotel)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Room)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,10 +40,7 @@
                 @Html.DisplayFor(modelItem => item.PetFriendly)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Hotel.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.Name)
+                @Html.DisplayFor(modelItem => item.Hotel.ID)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
