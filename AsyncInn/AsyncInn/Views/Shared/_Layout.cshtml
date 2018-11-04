@@ -12,22 +12,23 @@
             <p>Oh wait, you're an admin. What would you like to do?</p>
 
             <div class="nav-link">
-                <a asp-action="../Amenities/Index">Add/Edit a Hotel</a>
+                <a asp-action="../Amenities/Index" class="home-link">Add/Edit a Hotel</a>
             </div>
             <div class="nav-link">
-                <a asp-action="../HotelRooms/Index">Add/Edit a Room</a>
+                <a asp-action="../HotelRooms/Index" class="home-link">Add/Edit a Room</a>
             </div>
             <div class="nav-link">
-                <a asp-action="../Rooms/Index">Add/Edit a Room Type</a>
+                <a asp-action="../Rooms/Index" class="home-link">Add/Edit a Room Type</a>
             </div>
             <div class="nav-link">
-                <a asp-action="../Amenities/Index">Add/Edit an Amenity</a>
+                <a asp-action="../Amenities/Index" class="home-link">Add/Edit an Amenity</a>
             </div>
             <div class="nav-link">
-                <a asp-action="../RoomAmenities/Index">Add/Edit a Room Amenity</a>
+                <a asp-action="../RoomAmenities/Index" class="home-link">Add/Edit a Room Amenity</a>
             </div>
         </section>
         @RenderBody()
+        @RenderSection("Scripts", required: false)
     </main>
 </body>
 </html>
