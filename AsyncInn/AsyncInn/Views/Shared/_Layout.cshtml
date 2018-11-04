@@ -1,0 +1,33 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Async Inn</title>
+    <partial name="_Header.cshtml" />
+</head>
+<body>
+    <nav>
+        <h1>Welcome to Async Inn. We're Async, it's in the name!</h1>
+    </nav>
+    <main>
+        <section class="main-sec">
+            <p>Oh wait, you're an admin. What would you like to do?</p>
+
+            <div class="nav-link">
+                <a asp-action="../Amenities/Index">Add/Edit a Hotel</a>
+            </div>
+            <div class="nav-link">
+                <a asp-action="../HotelRooms/Index">Add/Edit a Room</a>
+            </div>
+            <div class="nav-link">
+                <a asp-action="../Rooms/Index">Add/Edit a Room Type</a>
+            </div>
+            <div class="nav-link">
+                <a asp-action="../Amenities/Index">Add/Edit an Amenity</a>
+            </div>
+            <div class="nav-link">
+                <a asp-action="../RoomAmenities/Index">Add/Edit a Room Amenity</a>
+            </div>
+        </section>
+        @RenderBody()
+    </main>
+</body>
+</html>

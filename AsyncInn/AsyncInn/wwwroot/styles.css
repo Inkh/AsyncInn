@@ -1,7 +1,11 @@
 ﻿body {
     font-family: sans-serif;
     background-color: #eeeeee;
-    width: 90%;
+}
+
+main {
+    margin: 0 auto;
+    width: 95%;
 }
 
 nav {
@@ -29,9 +33,9 @@ h1 {
     margin: 10px auto;
     width: 50%;
     height: 30px;
-    line-height: 30px;
     border-radius: 8px;
     border: 2px solid #65e452;
+    padding: 0px;
 }
 
 .nav-link:hover {
