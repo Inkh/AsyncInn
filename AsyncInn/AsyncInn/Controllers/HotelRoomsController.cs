@@ -73,14 +73,18 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? RoomID, int? HotelID)
         {
-            if (id == null)
+            if (HotelID == null || RoomID == null)
             {
                 return NotFound();
             }
 
-            var hotelRoom = await _context.HotelRooms.FindAsync(id);
+            //var hotelRoom = await _context.HotelRooms.FindAsync(id);
+            var hotelRoom = await _context.HotelRooms
+                .Include(h => h.Hotel)
+                .Include(h => h.Room)
+                .FirstOrDefaultAsync(m => m.RoomID == RoomID && m.HotelID == HotelID);
             if (hotelRoom == null)
             {
                 return NotFound();
@@ -128,9 +132,9 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? HotelID, int? RoomID)
         {
-            if (id == null)
+            if (HotelID == null || RoomID == null)
             {
                 return NotFound();
             }
@@ -138,7 +142,7 @@ namespace AsyncInn.Controllers
             var hotelRoom = await _context.HotelRooms
                 .Include(h => h.Hotel)
                 .Include(h => h.Room)
-                .FirstOrDefaultAsync(m => m.RoomID == id);
+                .FirstOrDefaultAsync(m => m.RoomID == RoomID && m.HotelID == HotelID);
             if (hotelRoom == null)
             {
                 return NotFound();
