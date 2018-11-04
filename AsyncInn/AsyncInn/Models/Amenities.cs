@@ -9,7 +9,7 @@ namespace AsyncInn.Models
     public class Amenities
     {
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field cannot be empty")]
         public string Name { get; set; }
 
         //Nav Props
