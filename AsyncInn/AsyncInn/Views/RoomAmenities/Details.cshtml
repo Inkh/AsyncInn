@@ -4,6 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
+<head>
+    <link href="~/lib/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
 <h2>Details</h2>
 
 <div>
@@ -14,13 +18,13 @@
             @Html.DisplayNameFor(model => model.Amenities)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Amenities.ID)
+            @Html.DisplayFor(model => model.Amenities.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Room)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Room.ID)
+            @Html.DisplayFor(model => model.Room.Name)
         </dd>
     </dl>
 </div>
