@@ -10,11 +10,11 @@ namespace AsyncInn.Models
     {
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field cannot be empty")]
         [Display(Name = "Room Name")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field cannot be empty")]
         [EnumDataType(typeof(Layout))]
         public Layout Layout { get; set; }
 

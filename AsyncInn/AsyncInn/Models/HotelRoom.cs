@@ -11,13 +11,13 @@ namespace AsyncInn.Models
         [Display(Name = "Hotel")]
         public int HotelID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field cannot be empty")]
         public int RoomNumber { get; set; }
 
         [Display(Name = "Room Type")]
         public int RoomID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field cannot be empty")]
         public decimal Rate { get; set; }
 
         [Required]
