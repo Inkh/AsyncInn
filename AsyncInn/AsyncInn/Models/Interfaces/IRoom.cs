@@ -21,5 +21,8 @@ namespace AsyncInn.Models.Interfaces
 
         //Read one
         Task<Room> GetRoom(int? id);
+
+        //Get room amenities
+        Task<RoomAmenities> GetRoomAmenities(int? RoomID, int? AmenitiesID);
     }
 }
