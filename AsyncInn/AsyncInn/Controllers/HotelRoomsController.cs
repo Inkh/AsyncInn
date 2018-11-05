@@ -154,9 +154,13 @@ namespace AsyncInn.Controllers
         // POST: HotelRooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int? HotelID, int? RoomID)
         {
-            var hotelRoom = await _context.HotelRooms.FindAsync(id);
+            var hotelRoom = await _context.HotelRooms
+                .Include(h => h.Hotel)
+                .Include(h => h.Room)
+                .FirstOrDefaultAsync(m => m.RoomID == RoomID && m.HotelID == HotelID);
+
             _context.HotelRooms.Remove(hotelRoom);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

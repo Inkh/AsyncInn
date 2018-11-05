@@ -36,6 +36,14 @@ namespace AsyncInn.Models.Services
             return await _context.Room.FirstOrDefaultAsync(r => r.ID == id);
         }
 
+        public async Task<RoomAmenities> GetRoomAmenities(int? RoomID, int? AmenitiesID)
+        {
+            return await _context.RoomAmenities
+                .Include(r => r.Room)
+                .Include(r => r.Amenities)
+                .FirstOrDefaultAsync(ra => ra.AmenitiesID == AmenitiesID && ra.RoomID == RoomID);
+        }
+
         public async Task<IEnumerable<Room>> GetRooms()
         {
             return await _context.Room.ToListAsync();
