@@ -74,7 +74,6 @@ namespace AsyncInnTest
                 var newRoom = await context.Room.FirstOrDefaultAsync(r => r.Name == myRoom.Name);
 
                 Assert.Equal("New Name", newRoom.Name);
-                Assert.Equal(1, newRoom.ID);
 
                 //DELETE
                 context.Room.Remove(newRoom);
@@ -271,6 +270,9 @@ namespace AsyncInnTest
             Assert.Equal(10, myHR.Rate);
         }
 
+        /// <summary>
+        /// Tests CRUD operations on HotelRooms table
+        /// </summary>
         [Fact]
         public async void HotelRoomsCRUDTest()
         {
@@ -321,5 +323,86 @@ namespace AsyncInnTest
             }
         }
 
+        /// <summary>
+        /// Tests getter on RoomAmenities model
+        /// </summary>
+        [Fact]
+        public void CanGetRoomAmenitiesTest()
+        {
+            RoomAmenities ra = new RoomAmenities();
+            ra.RoomID = 1;
+            ra.AmenitiesID = 2;
+
+            Assert.Equal(1, ra.RoomID);
+            Assert.Equal(2, ra.AmenitiesID);
+        }
+
+        /// <summary>
+        /// Tests setter on RoomAmenities model
+        /// </summary>
+        [Fact]
+        public void CanSetRoomAmenitiesTest()
+        {
+            RoomAmenities ra = new RoomAmenities();
+            ra.RoomID = 1;
+            ra.AmenitiesID = 2;
+
+            ra.RoomID = 10;
+
+            Assert.Equal(10, ra.RoomID);
+            Assert.Equal(2, ra.AmenitiesID);
+        }
+
+        /// <summary>
+        /// Tests CRUD operations on RoomAmenities table
+        /// </summary>
+        [Fact]
+        public async void RoomAmenitiesCRUDTest()
+        {
+            DbContextOptions<AsyncInnDbContext> options =
+                new DbContextOptionsBuilder<AsyncInnDbContext>()
+                .UseInMemoryDatabase("RoomAmenities")
+                .Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+
+                //CREATE
+                //Arrange
+                Amenities myAm = new Amenities { Name = "AC" };
+                Room myRoom = new Room { Name = "Jim crib", Layout = Layout.studio };
+
+                RoomAmenities myRA = new RoomAmenities();
+                myRA.Room = myRoom;
+                myRA.Amenities = myAm;
+
+                context.Add(myRA);
+                context.SaveChanges();
+
+                //READ
+                var newRA = await context.RoomAmenities.FirstOrDefaultAsync(ra => ra.Room.Name == myRA.Room.Name && ra.Amenities.Name == myRA.Amenities.Name);
+
+                Assert.Equal("Jim crib", newRA.Room.Name);
+                Assert.Equal("AC", newRA.Amenities.Name);
+
+                //UPDATE
+                newRA.Room.Name = "Carlos crib";
+                context.Update(newRA);
+                context.SaveChanges();
+
+                var changedRA = await context.RoomAmenities.FirstOrDefaultAsync(ra => ra.Room.Name == newRA.Room.Name && ra.Amenities.Name == newRA.Amenities.Name);
+
+                Assert.Equal("Carlos crib", changedRA.Room.Name);
+                Assert.Equal("AC", changedRA.Amenities.Name);
+
+                //DELETE
+                context.RoomAmenities.Remove(changedRA);
+                context.SaveChanges();
+
+                var deletedRA = await context.RoomAmenities.FirstOrDefaultAsync(ra => ra.Room.Name == changedRA.Room.Name && ra.Amenities.Name == changedRA.Amenities.Name);
+
+                Assert.True(deletedRA == null);
+            }
+        }
     }
 }
