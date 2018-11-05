@@ -196,7 +196,7 @@ namespace AsyncInnTest
         {
             DbContextOptions<AsyncInnDbContext> options =
                 new DbContextOptionsBuilder<AsyncInnDbContext>()
-                .UseInMemoryDatabase("Room")
+                .UseInMemoryDatabase("Amenity")
                 .Options;
 
             using (AsyncInnDbContext context = new AsyncInnDbContext(options))
@@ -235,5 +235,91 @@ namespace AsyncInnTest
                 Assert.True(deletedAmenity == null);
             }
         }
+
+        /// <summary>
+        /// Tests getter on HotelRoom model
+        /// </summary>
+        [Fact]
+        public void CanGetHotelRoomTest()
+        {
+            HotelRoom myHR = new HotelRoom();
+            myHR.HotelID = 1;
+            myHR.RoomID = 1;
+            myHR.Rate = 25;
+            myHR.RoomNumber = 239;
+
+            Assert.Equal(1, myHR.HotelID);
+            Assert.Equal(25, myHR.Rate);
+        }
+
+        /// <summary>
+        /// Tests setter on HotelRoom model
+        /// </summary>
+        [Fact]
+        public void CanSetHotelRoomsTest()
+        {
+            HotelRoom myHR = new HotelRoom();
+            myHR.HotelID = 1;
+            myHR.RoomID = 1;
+            myHR.Rate = 25;
+            myHR.RoomNumber = 239;
+
+            myHR.RoomNumber = 1;
+            myHR.Rate = 10;
+
+            Assert.Equal(1, myHR.RoomNumber);
+            Assert.Equal(10, myHR.Rate);
+        }
+
+        [Fact]
+        public async void HotelRoomsCRUDTest()
+        {
+            DbContextOptions<AsyncInnDbContext> options =
+                new DbContextOptionsBuilder<AsyncInnDbContext>()
+                .UseInMemoryDatabase("HotelRoom")
+                .Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+
+                //CREATE
+                //Arrange
+                HotelRoom myHR = new HotelRoom();
+                myHR.HotelID = 1;
+                myHR.RoomID = 1;
+                myHR.PetFriendly = true;
+                myHR.RoomNumber = 2;
+                myHR.Rate = 99;
+
+                context.Add(myHR);
+                context.SaveChanges();
+
+                //READ
+                var newHR = await context.HotelRooms.FirstOrDefaultAsync(hr => hr.HotelID == myHR.HotelID && hr.RoomID == myHR.RoomID);
+
+                Assert.Equal(99, myHR.Rate);
+                Assert.Equal(1, myHR.HotelID);
+
+                //UPDATE
+                newHR.Rate = 230;
+                context.Update(newHR);
+                context.SaveChanges();
+
+                var changedHR = await context.HotelRooms.FirstOrDefaultAsync(hr => hr.HotelID == newHR.HotelID && hr.RoomID == newHR.RoomID);
+
+                Assert.Equal(230, changedHR.Rate);
+                Assert.Equal(1, changedHR.HotelID);
+                Assert.Equal(1, changedHR.RoomID);
+
+                //DELETE
+                context.HotelRooms.Remove(changedHR);
+                context.SaveChanges();
+
+                var deletedHR = await context.HotelRooms.FirstOrDefaultAsync(hr => hr.HotelID == changedHR.HotelID && hr.RoomID == changedHR.RoomID);
+
+                Assert.True(deletedHR == null);
+            }
+        }
+
     }
 }
