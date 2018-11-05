@@ -2,6 +2,9 @@
 
 This is a simple web app that was built to help familiarize ourselves with the Entity Core framework. It allows for simple CRUD operations on multiple data.
 
+Deployment site:
+https://innasync.azurewebsites.net/
+
 ## Database Schema
 
 ![schema](assets/hotelschema.PNG)
