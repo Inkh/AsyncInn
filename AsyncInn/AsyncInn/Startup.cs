@@ -30,7 +30,7 @@ namespace AsyncInn
         {
             services.AddMvc();
             services.AddDbContext<AsyncInnDbContext>(options =>
-            options.UseSqlServer(Configuration["DefaultConnection"])
+            options.UseSqlServer(Configuration["ConnectionStrings:ProductionDB"])
             );
 
             services.AddScoped<IAmenity, AmenitiesService>();
